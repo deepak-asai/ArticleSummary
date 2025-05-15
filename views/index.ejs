@@ -66,7 +66,13 @@
 <body>
     <div class="container">
         <h2>Article Summarizer</h2>
-        <div class="sample-list">
+        <div style="display: flex; align-items: center; gap: 5px; margin-bottom: 1em;">
+            <input type="text" id="urlInput" placeholder="Enter article URL here" style="flex: 1; margin-bottom: 0;" />
+            <button id="clearBtn" title="Clear input" style="background: #e0e0e0; color: #333;">&#10006;</button>
+        </div>
+        <button id="summarizeBtn">Summarize</button>
+        <div id="result"></div>
+        <div class="sample-list" style="margin-top: 1em;">
             <strong>Try these sample articles:</strong>
             <span class="sample-link"
                 data-url="https://timesofindia.indiatimes.com/technology/tech-news/amazon-cuts-more-jobs-as-part-of-our-ongoing-work-to-make-our-teams-says-company/articleshow/121178145.cms">Sample
@@ -78,12 +84,6 @@
                 data-url="https://timesofindia.indiatimes.com/india/india-pakistan-news-live-updates-jammu-kashmir-pahalgam-terror-attack-operation-sindoor-pm-modi-ceasefire-violation-boycott-turkey-operation-keller/liveblog/121173770.cms">Sample
                 Article 3</span>
         </div>
-        <div style="display: flex; align-items: center; gap: 5px; margin-bottom: 1em;">
-            <input type="text" id="urlInput" placeholder="Enter article URL here" style="flex: 1; margin-bottom: 0;" />
-            <button id="clearBtn" title="Clear input" style="background: #e0e0e0; color: #333;">&#10006;</button>
-        </div>
-        <button id="summarizeBtn">Summarize</button>
-        <div id="result"></div>
     </div>
     <script>
         const btn = document.getElementById('summarizeBtn');
