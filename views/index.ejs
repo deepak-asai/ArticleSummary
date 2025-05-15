@@ -28,6 +28,13 @@
             border-radius: 4px;
         }
 
+        .text-input {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            margin-bottom: 1em;
+        }
+
         button {
             padding: 0.5em 1.5em;
             border: none;
@@ -46,11 +53,11 @@
             padding: 1em;
             background: #f1f1f1;
             border-radius: 4px;
-            min-height: 2em;
+            min-height: 30px;
         }
 
         .sample-list {
-            margin-bottom: 1em;
+            margin-top: 20px;
         }
 
         .sample-link {
@@ -66,13 +73,13 @@
 <body>
     <div class="container">
         <h2>Article Summarizer</h2>
-        <div style="display: flex; align-items: center; gap: 5px; margin-bottom: 1em;">
+        <div class="text-input">
             <input type="text" id="urlInput" placeholder="Enter article URL here" style="flex: 1; margin-bottom: 0;" />
             <button id="clearBtn" title="Clear input" style="background: #e0e0e0; color: #333;">&#10006;</button>
         </div>
         <button id="summarizeBtn">Summarize</button>
         <div id="result"></div>
-        <div class="sample-list" style="margin-top: 1em;">
+        <div class="sample-list" style="">
             <strong>Try these sample articles:</strong>
             <span class="sample-link"
                 data-url="https://timesofindia.indiatimes.com/technology/tech-news/amazon-cuts-more-jobs-as-part-of-our-ongoing-work-to-make-our-teams-says-company/articleshow/121178145.cms">Sample
