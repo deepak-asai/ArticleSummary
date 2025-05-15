@@ -24,7 +24,6 @@
         input[type="text"] {
             width: 100%;
             padding: 0.5em;
-            margin-bottom: 1em;
             border: 1px solid #ccc;
             border-radius: 4px;
         }
@@ -79,7 +78,10 @@
                 data-url="https://timesofindia.indiatimes.com/india/india-pakistan-news-live-updates-jammu-kashmir-pahalgam-terror-attack-operation-sindoor-pm-modi-ceasefire-violation-boycott-turkey-operation-keller/liveblog/121173770.cms">Sample
                 Article 3</span>
         </div>
-        <input type="text" id="urlInput" placeholder="Enter article URL here" />
+        <div style="display: flex; align-items: center; gap: 5px; margin-bottom: 1em;">
+            <input type="text" id="urlInput" placeholder="Enter article URL here" style="flex: 1; margin-bottom: 0;" />
+            <button id="clearBtn" title="Clear input" style="background:#3c1e21;">&#10006;</button>
+        </div>
         <button id="summarizeBtn">Summarize</button>
         <div id="result"></div>
     </div>
@@ -87,6 +89,7 @@
         const btn = document.getElementById('summarizeBtn');
         const input = document.getElementById('urlInput');
         const result = document.getElementById('result');
+        const clearBtn = document.getElementById('clearBtn');
         const sampleLinks = document.querySelectorAll('.sample-link');
         sampleLinks.forEach(function (link) {
             link.onclick = function () {
@@ -94,6 +97,11 @@
                 btn.click();
             };
         });
+        clearBtn.onclick = function () {
+            input.value = '';
+            result.textContent = '';
+            input.focus();
+        };
         btn.onclick = function () {
             const url = input.value.trim();
             if (!url) {
