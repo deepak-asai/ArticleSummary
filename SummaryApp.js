@@ -10,7 +10,7 @@ class SummaryService {
 
     async getSummary(input) {
         const response = await this.client.responses.create({
-            model: "gpt-4.1",
+            model: "gpt-4.1-mini",
             input
         });
         return response.output_text;
