@@ -12,7 +12,7 @@ app.get('/summary', async (req, res) => {
     }
     console.log('Received request for summary of:', articleUrl);
     try {
-        const prompt = `Generate summary for this article. The summary should be less than 60 words. The output should directly convey the information from the article. Don't specify anything about the article. - ${articleUrl}`;
+        const prompt = `Generate a summary of less than 60 words for the article at this link: ${articleUrl}. The summary should directly convey the main information from the article without mentioning that it is a summary or referring to the article itself`;
         const summary = await summaryService.getSummary(prompt);
         res.status(200).send(summary + '\n');
     } catch (err) {
