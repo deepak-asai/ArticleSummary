@@ -2,8 +2,12 @@ require('dotenv').config();
 const express = require('express');
 const config = require('./config');
 const summaryService = require('./SummaryApp');
+const path = require('path');
 
 const app = express();
+
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
 
 app.get('/summary', async (req, res) => {
     const articleUrl = req.query.articleLink;
@@ -21,7 +25,7 @@ app.get('/summary', async (req, res) => {
 });
 
 app.get('/', (req, res) => {
-    res.send(config.message + '\n');
+    res.render('index');
 });
 
 app.listen(config.port, () => {

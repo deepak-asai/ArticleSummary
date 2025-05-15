@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Article Summarizer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            background: #f9f9f9;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: auto;
+            background: #fff;
+            padding: 2em;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px #0001;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 0.5em;
+            margin-bottom: 1em;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            padding: 0.5em 1.5em;
+            border: none;
+            background: #007bff;
+            color: #fff;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:disabled {
+            background: #aaa;
+        }
+
+        #result {
+            margin-top: 1.5em;
+            padding: 1em;
+            background: #f1f1f1;
+            border-radius: 4px;
+            min-height: 2em;
+        }
+
+        .sample-list {
+            margin-bottom: 1em;
+        }
+
+        .sample-link {
+            color: #007bff;
+            cursor: pointer;
+            text-decoration: underline;
+            display: block;
+            margin-bottom: 0.5em;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Article Summarizer</h2>
+        <div class="sample-list">
+            <strong>Try these sample articles:</strong>
+            <span class="sample-link"
+                data-url="https://timesofindia.indiatimes.com/technology/tech-news/amazon-cuts-more-jobs-as-part-of-our-ongoing-work-to-make-our-teams-says-company/articleshow/121178145.cms">Sample
+                Article 1</span>
+            <span class="sample-link"
+                data-url="https://indianexpress.com/article/political-pulse/president-murmu-supreme-court-assent-to-bills-timelines-judicial-orders-10007476/?ref=breaking_hp">Sample
+                Article 2</span>
+            <span class="sample-link"
+                data-url="https://timesofindia.indiatimes.com/india/india-pakistan-news-live-updates-jammu-kashmir-pahalgam-terror-attack-operation-sindoor-pm-modi-ceasefire-violation-boycott-turkey-operation-keller/liveblog/121173770.cms">Sample
+                Article 3</span>
+        </div>
+        <input type="text" id="urlInput" placeholder="Enter article URL here" />
+        <button id="summarizeBtn">Summarize</button>
+        <div id="result"></div>
+    </div>
+    <script>
+        const btn = document.getElementById('summarizeBtn');
+        const input = document.getElementById('urlInput');
+        const result = document.getElementById('result');
+        const sampleLinks = document.querySelectorAll('.sample-link');
+        sampleLinks.forEach(function (link) {
+            link.onclick = function () {
+                input.value = link.getAttribute('data-url');
+                btn.click();
+            };
+        });
+        btn.onclick = function () {
+            const url = input.value.trim();
+            if (!url) {
+                result.textContent = 'Please enter a valid URL.';
+                return;
+            }
+            btn.disabled = true;
+            result.textContent = 'Summarizing...';
+            fetch('/summary?articleLink=' + encodeURIComponent(url))
+                .then(function (res) { return res.text().then(function (text) { return { ok: res.ok, text: text }; }); })
+                .then(function (data) {
+                    if (data.ok) {
+                        result.textContent = data.text;
+                    } else {
+                        result.textContent = 'Error: ' + data.text;
+                    }
+                    btn.disabled = false;
+                })
+                .catch(function (e) {
+                    result.textContent = 'Error: ' + e.message;
+                    btn.disabled = false;
+                });
+        };
+    </script>
+</body>
+
+</html>
