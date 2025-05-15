@@ -4,7 +4,7 @@ const OpenAI = require("openai");
 class SummaryService {
     constructor() {
         this.client = new OpenAI({
-            apiKey: process.env.OPENAI_API_KEY,
+            apiKey: process.env.OPENAI_API_KEY || "",
         });
     }
 
