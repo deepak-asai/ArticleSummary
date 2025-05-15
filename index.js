@@ -8,7 +8,7 @@ const app = express();
 app.get('/summary', async (req, res) => {
     console.log('Received request for summary');
     try {
-        const summary = await summaryService.getSummary('Generate summary for this article. The summary should be less than 60 words - https://timesofindia.indiatimes.com/toi-plus/toi-in-depth-stories-on-operation-sindoor/what-us-got-terribly-wrong-while-intervening-between-india-and-pakistan/articleshow/121158048.cms');
+        const summary = await summaryService.getSummary('Generate summary for this article. The summary should be less than 60 words. The output directly convey the information from the article. Dont specifiy anything about the article - https://timesofindia.indiatimes.com/toi-plus/toi-in-depth-stories-on-operation-sindoor/what-us-got-terribly-wrong-while-intervening-between-india-and-pakistan/articleshow/121158048.cms');
         res.status(200).send(summary + '\n');
     } catch (err) {
         res.status(500).send('Error: ' + err.message);
